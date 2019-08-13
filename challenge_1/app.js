@@ -4,7 +4,7 @@ const gameBoard = [
   [0, 0, 0]
 ];
 
-const state = {
+let state = {
   player: 'O',
   winner: null,
   victory: false,
@@ -144,4 +144,17 @@ const gameOver = () => {
     alert(`The game is a draw.\nThe only winning move is not to play.`);
   }
   return !!state.winner;
+};
+
+const reset = () => {
+  state = {
+    player: 'O',
+    winner: null,
+    victory: false,
+    moves: 0,
+  }
+  var boxes = document.getElementById('game-board').querySelectorAll('.box');
+  boxes.forEach((element) => {
+    element.innerText = '***';
+  });
 };
