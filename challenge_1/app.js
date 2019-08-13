@@ -15,6 +15,9 @@ let state = {
   oWins: 0,
 }
 
+const puppyUrl = 'https://i.ibb.co/dtt7CMY/Screen-Shot-2019-08-12-at-8-09-09-PM.png';
+const kittenUrl = 'https://i.ibb.co/fQxwG7t/Screen-Shot-2019-08-12-at-8-08-40-PM.png';
+
 // Toggles a piece on the board
 const toggle = () => {
   if (state.victory === true) {
@@ -25,10 +28,12 @@ const toggle = () => {
   }
   if (state.player === 'X') {
     state.player = 'O';
+    event.target.innerHTML = `<img class=image src='${puppyUrl}'/>`
   } else {
     state.player = 'X';
+    event.target.innerHTML = `<img class=image src='${kittenUrl}'/>`
   }
-  event.target.innerText = state.player;
+  // event.target.innerText = state.player;
   state.moves++;
   let coord = JSON.parse(event.target.id);
   updateGameBoard(coord);
