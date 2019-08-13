@@ -6,17 +6,21 @@ const gameBoard = [
 
 const state = {
   player: 'O',
-  coord: null,
+  winner: null,
+  victory: false,
+  moves: 0,
 }
 
 const togglePiece = () => {
   return () => {
+    if (state.victory === true) {
+      return;
+    }
     let player = event.target.innerText;
-    // player = state.player;
     if (player === 'X') {
-      state.player = 'O';
+      return;
     } else if (player === 'O') {
-      state.player = 'X';
+      return;
     } else if (player === '***') {
       if (state.player === 'X') {
         state.player = 'O';
@@ -25,6 +29,10 @@ const togglePiece = () => {
       }
     }
     event.target.innerText = state.player;
+    state.moves++;
+    let coord = JSON.parse(event.target.id);
+    updateGameBoard(coord);
+    checkBoardForVictory(coord);
   }
 };
 
@@ -90,13 +98,50 @@ const checkMajorDiag = (coord) => {
 };
 
 const checkMinorDiag = (coord) => {
+  let row = coord[0] - coord[0];
+  let col = coord[0] + coord[1];
+  let total = 0;
 
+  for (let i = 0; i < 3; i++) {
+    let valueAtPosition = gameBoard[row][col];
+    if (typeof valueAtPosition === 'undefined' || valueAtPosition === 0) {
+      return;
+    }
+    total += valueAtPosition;
+    row++;
+    col--
+  }
+  victory(total);
 };
+
+const checkBoardForVictory = (coord) => {
+  checkRow(coord);
+  checkCol(coord);
+  checkMajorDiag(coord);
+  checkMinorDiag(coord);
+  if (!!!state.winner && state.moves === 9) {
+    gameOver();
+  }
+}
 
 const victory = (value) => {
   if (value === 6) {
-    console.log('X is the victor!');
+    alert('X is the victor!');
+    state.winner = 'X'
+    return true;
   } else if (value === 3) {
-    console.log('O is the winner!');
+    alert('O is the winner!');
+    state.winner = 'O';
+    return true;
   }
+  return false;
+};
+
+const gameOver = () => {
+  if (state.winner) {
+    alert(`The game is over.\n${state.winner} reigns victorious!`);
+  } else if (state.moves === 9) {
+    alert(`The game is a draw.\nThe only winning move is not to play.`);
+  }
+  return !!state.winner;
 };
