@@ -35,6 +35,14 @@ const toggle = () => {
   checkBoardForVictory(coord);
 };
 
+const updateUserScore = (winner) => {
+  if (winner === 'X') {
+    document.getElementById('player-x-score').innerText = state.xWins;
+  } else {
+    document.getElementById('player-o-score').innerText = state.oWins;
+  }
+}
+
 // Updates board placement for calculating wins
 const updateGameBoard = (coord) => {
   let value = 0;
@@ -137,11 +145,13 @@ const victory = (value) => {
     alert('X is the victor!');
     state.winner = 'X';
     state.xWins++;
+    updateUserScore(state.winner);
     return true;
   } else if (value === 3) {
     alert('O is the winner!');
     state.winner = 'O';
     state.oWins++;
+    updateUserScore(state.winner);
     return true;
   }
   return false;
@@ -160,10 +170,12 @@ const gameOver = () => {
 // Resets the game board and state
 const reset = () => {
   state = {
-    player: 'O',
+    player: state.winner,
     winner: null,
     victory: false,
     moves: 0,
+    oWins: state.oWins,
+    xWins: state.xWins,
   }
   var boxes = document.getElementById('game-board').querySelectorAll('.box');
   boxes.forEach((element) => {

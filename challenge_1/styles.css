@@ -1,0 +1,37 @@
+.box {
+  width: 150px;
+  height: 150px;
+  border: solid black 2px;
+}
+
+#game-board-container {
+  display: flex;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+}
+
+#reset {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  width: 100px;
+}
+
+#player-x {
+  text-align: center;
+  margin-left: 150px;
+}
+
+#player-o {
+  text-align: center;
+  margin-right: 150px;
+}
+
+.score {
+  font-size: 50px;
+}

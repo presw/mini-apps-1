@@ -3,34 +3,47 @@
   <head>
     <title>Tic Tac Toe</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <h1>Tic Tac Toe</h1>
-    <table id="game-board">
-      <tr>
-        <th>TIC</th>
-        <th>TAC</th>
-        <th>TOE</th>
-      </tr>
-      <tr>
-        <th class="box" id="[0,0]">***</th>
-        <th class="box" id="[0,1]">***</th>
-        <th class="box" id="[0,2]">***</th>
-      </tr>
-      <tr>
-        <th class="box" id="[1,0]">***</th>
-        <th class="box" id="[1,1]">***</th>
-        <th class="box" id="[1,2]">***</th>
-      </tr>
-      <tr>
-        <th class="box" id="[2,0]">***</th>
-        <th class="box" id="[2,1]">***</th>
-        <th class="box" id="[2,2]">***</th>
-      </tr>
-    </table>
-    <button id="reset">Reset the game</button>
+    <div class="header">
+      <h1 align="center">Tic Tac Toe</h1>
+      <button id="reset">Reset the game</button>
+    </div>
+    <div id="game-board-container">
+      <div id="player-x">
+        <h1>Player X</h1>
+        <div id="player-x-score" class="score">0</div>
+      </div>
+      <table align="center" id="game-board">
+        <tr>
+          <th>TIC</th>
+          <th>TAC</th>
+          <th>TOE</th>
+        </tr>
+        <tr>
+          <th class="box" id="[0,0]">***</th>
+          <th class="box" id="[0,1]">***</th>
+          <th class="box" id="[0,2]">***</th>
+        </tr>
+        <tr>
+          <th class="box" id="[1,0]">***</th>
+          <th class="box" id="[1,1]">***</th>
+          <th class="box" id="[1,2]">***</th>
+        </tr>
+        <tr>
+          <th class="box" id="[2,0]">***</th>
+          <th class="box" id="[2,1]">***</th>
+          <th class="box" id="[2,2]">***</th>
+        </tr>
+      </table>
+      <div id="player-o">
+        <h1>Player O</h1>
+        <div id="player-o-score" class="score">0</div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="listeners.js"></script>
   </body>
 
 </html>
-<script src="app.js"></script>
-<script src="listeners.js"></script>
