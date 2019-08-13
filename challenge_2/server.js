@@ -10,4 +10,8 @@ app.get('/', (req, res) => {
   res.sendFile('index');
 });
 
+app.post('/', (req, res) => {
+  res.send();
+});
+
 app.listen(port, () => {});
