@@ -1,43 +1,39 @@
+// Game board and positions
 const gameBoard = [
   [0, 0, 0],
   [0, 0, 0],
   [0, 0, 0]
 ];
 
+// State of the game
 let state = {
   player: 'O',
   winner: null,
   victory: false,
   moves: 0,
+  xWins: 0,
+  oWins: 0,
 }
 
-const togglePiece = () => {
-  return () => {
-    if (state.victory === true) {
-      return;
-    }
-    let player = event.target.innerText;
-    if (player === 'X') {
-      return;
-    } else if (player === 'O') {
-      return;
-    } else if (player === '***') {
-      if (state.player === 'X') {
-        state.player = 'O';
-      } else {
-        state.player = 'X';
-      }
-    }
-    event.target.innerText = state.player;
-    state.moves++;
-    let coord = JSON.parse(event.target.id);
-    updateGameBoard(coord);
-    checkBoardForVictory(coord);
+// Toggles a piece on the board
+const toggle = () => {
+  if (state.victory === true) {
+    return;
   }
+  if (locationTaken(event)) {
+    return;
+  }
+  if (state.player === 'X') {
+    state.player = 'O';
+  } else {
+    state.player = 'X';
+  }
+  event.target.innerText = state.player;
+  state.moves++;
+  let coord = JSON.parse(event.target.id);
+  updateGameBoard(coord);
+  checkBoardForVictory(coord);
 };
-
-// Toggles a location between 'X' and 'O'
-const toggle = togglePiece();
 
 // Updates board placement for calculating wins
 const updateGameBoard = (coord) => {
@@ -49,6 +45,17 @@ const updateGameBoard = (coord) => {
   }
   state.coord = coord;
   gameBoard[coord[0]][coord[1]] = value;
+}
+
+// Verifies if a location is available
+const locationTaken = (event) => {
+  let coord = JSON.parse(event.target.id);
+  let position = gameBoard[coord[0]][coord[1]];
+  if (position > 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // Functions that check for victory conditions
@@ -109,7 +116,7 @@ const checkMinorDiag = (coord) => {
     }
     total += valueAtPosition;
     row++;
-    col--
+    col--;
   }
   victory(total);
 };
@@ -124,19 +131,23 @@ const checkBoardForVictory = (coord) => {
   }
 }
 
+// Victory calculator
 const victory = (value) => {
   if (value === 6) {
     alert('X is the victor!');
-    state.winner = 'X'
+    state.winner = 'X';
+    state.xWins++;
     return true;
   } else if (value === 3) {
     alert('O is the winner!');
     state.winner = 'O';
+    state.oWins++;
     return true;
   }
   return false;
 };
 
+// Checks for a game over (win or draw)
 const gameOver = () => {
   if (state.winner) {
     alert(`The game is over.\n${state.winner} reigns victorious!`);
@@ -146,6 +157,7 @@ const gameOver = () => {
   return !!state.winner;
 };
 
+// Resets the game board and state
 const reset = () => {
   state = {
     player: 'O',
@@ -156,5 +168,10 @@ const reset = () => {
   var boxes = document.getElementById('game-board').querySelectorAll('.box');
   boxes.forEach((element) => {
     element.innerText = '***';
+  });
+  gameBoard.forEach((array) => {
+    array.forEach((value, index) => {
+      array[index] = 0;
+    });
   });
 };
