@@ -3,6 +3,7 @@ const router = express();
 const port = 3000;
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const functions = require('./functions');
 
 router.use(express.static('../client'));
 router.use(morgan('combined'));
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('REQ BODY:', req.body);
+  let outputString = functions.jsonToCsv(req.body.text);
   res.end();
 });
 
