@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   let outputString = functions.jsonToCsv(req.body.text);
-  res.end();
+  res.redirect('/');
 });
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });
