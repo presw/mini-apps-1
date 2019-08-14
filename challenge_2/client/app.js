@@ -1,13 +1,4 @@
 
-const postJSON = (data) => {
-  fetch("someURL", {
-    method: 'POST',
-    body: JSON.stringify(data)
-  }).then((res) => {
-    console.log('What');
-  })
-};
-
 // Converts an object to a CSV formatted string
 const jsonToCsv = (data) => {
   let csvArray = [];
@@ -20,6 +11,7 @@ const jsonToCsv = (data) => {
     }
   });
 
+  // Inner recursive function
   const recurseJsonToCsv = (child) => {
     let childKeys = Object.keys(child);
     let childValues = [];
@@ -48,5 +40,3 @@ const jsonToCsv = (data) => {
   let csvString = csvArray.join('\n');
   return csvString;
 };
-
-console.log('page loaded');

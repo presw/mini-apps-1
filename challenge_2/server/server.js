@@ -1,17 +1,22 @@
 const express = require('express');
-const app = express();
+const router = express();
 const port = 3000;
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
-app.use(express.static('../client'));
-app.use(morgan('combined'));
+router.use(express.static('../client'));
+router.use(morgan('combined'));
 
-app.get('/', (req, res) => {
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.get('/', (req, res) => {
   res.sendFile('index');
 });
 
-app.post('/', (req, res) => {
-  res.send();
+router.post('/', (req, res) => {
+  console.log('REQ BODY:', req.body);
+  res.end();
 });
 
-app.listen(port, () => { console.log(`Listening on port: ${port}`) });
+router.listen(port, () => { console.log(`Listening on port: ${port}`) });
