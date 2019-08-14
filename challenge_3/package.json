@@ -5,7 +5,7 @@
   "main": "client/app.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "babel client --ignore node_modules --out-dir public --presets=env,react --watch --source-maps inline"
   },
   "author": "",
@@ -14,6 +14,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   }
