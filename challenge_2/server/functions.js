@@ -16,7 +16,6 @@ const jsonToCsv = (string) => {
 
   // Inner recursive function
   const recurseJsonToCsv = (node) => {
-    console.log('RECURSING');
     let nodeKeys = Object.keys(node);
     let nodeValues = [];
     nodeKeys.forEach((key) => {
@@ -34,7 +33,6 @@ const jsonToCsv = (string) => {
     csvArray.push(nodeValues);
     console.log('Children:', node);
     if (node.children) {
-      // console.log("HITTING IFFFFF STATEMENT");
       node.children.forEach((childArray) => {
         recurseJsonToCsv(childArray);
       });
@@ -44,7 +42,6 @@ const jsonToCsv = (string) => {
   recurseJsonToCsv(data);
 
   let csvString = csvArray.join('\n');
-  // console.log('IN FUNC STRING:', csvString);
   return csvString;
 };
 
