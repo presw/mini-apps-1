@@ -38,6 +38,16 @@ class App extends React.Component {
   }
 
   submitF1() {
+    let dataObj = {};
+    for (let key in this.state) {
+      if (key !== 'currentView') {
+        dataObj[key] = this.state[key];
+      }
+    }
+    console.log(dataObj);
+    $.post('http://localhost:3000', dataObj, (data) => {
+
+    })
     this.setState({ currentView: F2 });
   }
 
@@ -50,6 +60,7 @@ class App extends React.Component {
   }
 
   returnToMain() {
+
     this.setState({
       currentView: FrontPage,
       name: null,
@@ -169,5 +180,11 @@ const Confirm = (props) => {
     </div>
   )
 }
+
+// AJAX requests
+
+// $.post('http://localhost:3000', 'testing POST', (req, res) => {
+//   console.log('Making a post');
+// })
 
 ReactDOM.render(<App />, document.getElementById('app'));
