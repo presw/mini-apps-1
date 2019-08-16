@@ -5,17 +5,23 @@
 }
 
 .true {
-  background-color: orangered;
+  /* background-color: orangered; */
   width: 100px;
   height: 100px;
-  border: 1px solid black
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url('https://i.ibb.co/t3JrP5c/Screen-Shot-2019-08-12-at-8-08-40-PM.png');
+  background-size: contain;
 }
 
 .false {
-  background-color: black;
+  /* background-color: black; */
   width: 100px;
   height: 100px;
-  border: 1px solid black
+  border: 1px solid black;
+  border-radius: 50%;
+  background-image: url('https://i.ibb.co/dtt7CMY/Screen-Shot-2019-08-12-at-8-09-09-PM.png');
+  background-size: contain;
 }
 
 .square {
