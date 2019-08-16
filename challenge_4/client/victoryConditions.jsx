@@ -9,7 +9,6 @@ class VictoryConditions {
     let col = coord[0];
     let total = 0;
     for (let i = 0; i < 6; i++) {
-      debugger;
       let row = i;
       let position = gameBoard[row][col];
       if (position === player) {
@@ -78,8 +77,8 @@ class VictoryConditions {
         } else {
           total = 0;
         }
-        row++;
-        col--;
+        col++;
+        row--;
       }
     }
   };

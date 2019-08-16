@@ -36,11 +36,9 @@ class App extends React.Component {
         id = `${data}` + `${i}`
         board[i][data] = this.state.currentPlayer;
         if (this.state.currentPlayer) {
-          console.log(id);
           this.setState({ currentPlayer: false });
           document.getElementById(id).className = false;
         } else {
-          console.log(id);
           this.setState({ currentPlayer: true });
           document.getElementById(id).className = true;
         }
@@ -49,10 +47,12 @@ class App extends React.Component {
       }
     }
     if (!columnFull) {
+      id = id.split('');
+      id = id.map((element) => { return parseInt(element) });
       victory.checkCol(id, board, this.state.currentPlayer);
       victory.checkRow(id, board, this.state.currentPlayer);
       victory.checkMajorDiag(id, board, this.state.currentPlayer);
-      victory.checkMajorDiag(id, board, this.state.currentPlayer);
+      victory.checkMinorDiag(id, board, this.state.currentPlayer);
     }
   }
 
