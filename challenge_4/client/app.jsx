@@ -1,5 +1,8 @@
 import React from 'react';
 import GameBoard from './components/gameBoard.jsx';
+import VictoryConditions from './victoryConditions.jsx';
+
+let victory = new VictoryConditions();
 
 class App extends React.Component {
   constructor(props) {
@@ -24,13 +27,13 @@ class App extends React.Component {
 
   onColumnClick(event, data) {
     event.persist();
-
-    // document.getElementById(id).className = true;
-    console.log(event);
     let board = this.state.gameBoard;
+    let id;
+    let columnFull = true;
     for (let i = board.length - 1; i >= 0; i--) {
       if (board[i][data] === null) {
-        let id = `${data}` + `${i}`
+        columnFull = false;
+        id = `${data}` + `${i}`
         board[i][data] = this.state.currentPlayer;
         if (this.state.currentPlayer) {
           console.log(id);
@@ -44,7 +47,12 @@ class App extends React.Component {
         this.setState({ gameBoard: board });
         break;
       }
-      console.log(board);
+    }
+    if (!columnFull) {
+      victory.checkCol(id, board, this.state.currentPlayer);
+      victory.checkRow(id, board, this.state.currentPlayer);
+      victory.checkMajorDiag(id, board, this.state.currentPlayer);
+      victory.checkMajorDiag(id, board, this.state.currentPlayer);
     }
   }
 
